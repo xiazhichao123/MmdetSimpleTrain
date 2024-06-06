@@ -1,0 +1,40 @@
+
+
+
+
+&__project_name: coco128
+
+root_dir: 'H:/open_sources/MmdetSimpleTrain/workspace'
+
+datasets:             # coco format. json file.
+  train_datasets: [project/coco128/datasets/coco128_train.json]
+  val_datasets: [project/coco128/datasets/coco128_train.json]
+
+  meta_data: project/coco128/datasets/xc-meta-data.yaml    # yaml: names:  0:person
+
+
+
+model_args:
+  config: weights/faster_rcnn/faster-rcnn_r50_fpn_1x_coco.py
+  load_from: weights/faster_rcnn/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth
+   # auto or checkpoint path. try to auto resume from the latest checkpoint
+  resume: False
+  'work_dir': 'project/{{__project_name}}/output'
+
+  'torch_cache': 'weights/cache'
+
+  amp: False
+  auto_scale_lr: False
+  launcher: none      # ['none', 'pytorch', 'slurm', 'mpi']
+  local_rank: 0
+
+
+
+  cfg_options:
+    train_dataloader.batch_size: 2
+    default_hooks.logger.interval: 1
+    default_hooks.checkpoint.interval: 1
+    val_dataloader.batch_size: 2
+    train_cfg.max_epochs: 10
+
+#    model.backbone.init_cfg: Null

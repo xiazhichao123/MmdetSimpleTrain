@@ -1,0 +1,22 @@
+
+log_format:
+  dir_out: False    # True for file
+  log_level: INFO
+  log_filename: log.log   # file for current path; or path
+  size_format_flag: False    # False for time format
+  verbose: True
+
+  size_format:
+    max_M: 20
+    backup_nums: 10
+    encoding: utf-8
+
+  time_format:
+    when: 'midnight'    # # S M H D midnight - roll over at midnight W{0-6} - roll over on a certain day; 0 - Monday
+    interval: 1
+    backup_nums: 10
+    encoding: utf-8
+
+
+
+project_name: 'coco128'
